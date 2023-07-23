@@ -47,7 +47,7 @@ require_once 'controller.team.php';
                 <td>
                     <form action="controller.team.php" method="post">
                         <input type="hidden" name="join" value="<?php echo $teams["id"] ?>">
-                        <button type="submit" name="join">Join</button>
+                        <button type="submit" name="joinName">Join</button>
                     </form>
                 </td>
             </tr>

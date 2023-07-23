@@ -1,6 +1,7 @@
 <?php
 
 require_once '../helper/database.php';
+
 class Team
 {
     public function getTeams()
@@ -64,26 +65,25 @@ class Team
     }
     public function joinTeam()
     {
+        session_start();
         DB::Init();
-        $sql = "INSERT INTO team_user (team_id,user_id)  VALUES (?,?)";
+        $sql = "INSERT INTO team_user (team_id, user_id) VALUES (?, ?)";
         $stmt = DB::get()->stmt_init();
 
         if (!$stmt->prepare($sql)) {
-            die("SQL error: " . DB::get()->error);
+            die("SQL hatasi: " . DB::get()->error);
         }
-        die(var_dump([$_POST["join"], $_SESSION["user_id"]]));
-        $stmt->bind_param("ss", $_POST["join"], $_SESSION["user_id"]);
+
+        $stmt->bind_param("ss", $_POST['join'], $_SESSION['user_id']);
 
         if (!$stmt->execute()) {
             if (DB::get()->errno === 1062) {
-                echo "Same team exists";
+                echo "Ayni takim zaten var";
             } else {
-                die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
+                die("SQL hatasi: " . $stmt->error . " Hata numarasi: " . DB::get()->errno);
             }
         } else {
-
-            header("Location: view.team.php
-            ");
+            header("Location: view.team.php");
             exit;
         }
     }

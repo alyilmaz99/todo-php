@@ -16,22 +16,19 @@ session_start();
 </head>
 
 <body>
+    <?php if (!isset($_SESSION["user_id"])): ?>
+    <?php header("Location: auth/login.php");?>
+    <?php else: ?>
     <div style="display: flex; justify-content: center">
-        <?php if (isset($_SESSION["user_id"])): ?>
-
         <h1>Welcome <?php echo $_SESSION["user_name"]; ?> </h1>
-        <?php else: ?>
-        <p> <?php echo "USER BİLGİSİNDE HATA VAR!"; ?> </p>
-        <?php endif;?>
     </div>
-
     <div style="display: flex; justify-content: center">
         <a href="team/view.team.php">Teams</a>
     </div>
     <div style="display: flex; justify-content: center">
         <a href="todo/todo.view.php">Todo</a>
     </div>
-
+    <?php endif;?>
 </body>
 
 </html>
