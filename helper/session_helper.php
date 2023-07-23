@@ -20,4 +20,9 @@ class SessionHelper
             $_SESSION["user_verification_code"] = $this->user["verification_code"];
         }
     }
+    public function sessionDestroy()
+    {
+        session_destroy();
+        header("Location: auth/login.php");
+    }
 }

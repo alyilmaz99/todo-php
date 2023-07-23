@@ -1,5 +1,8 @@
 <?php
-session_start();
+ini_set('display_errors', true);
+error_reporting(E_ALL);
+
+require_once 'helper/session_helper.php';
 ?>
 
 
@@ -28,6 +31,9 @@ session_start();
     <div style="display: flex; justify-content: center">
         <button id="todo">Todo</button>
     </div>
+    <div style="display: flex; justify-content: center">
+        <button id="logOut">Log Out</button>
+    </div>
     <?php endif;?>
 </body>
 
@@ -39,6 +45,11 @@ button.addEventListener("click", function() {
 var button = document.getElementById("todo");
 button.addEventListener("click", function() {
     window.location.href = "todo/todo.view.php";
+})
+var button = document.getElementById("logOut");
+button.addEventListener("click", function() {
+    window.location.href = "auth/logout.php";
+
 })
 </script>
 
