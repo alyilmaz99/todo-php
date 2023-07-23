@@ -25,7 +25,12 @@ session_start();
         <?php endif;?>
     </div>
 
-
+    <div style="display: flex; justify-content: center">
+        <a href="team/view.team.php">Teams</a>
+    </div>
+    <div style="display: flex; justify-content: center">
+        <a href="todo/todo.view.php">Todo</a>
+    </div>
 
 </body>
 

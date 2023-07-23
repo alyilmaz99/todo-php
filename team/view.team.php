@@ -38,10 +38,24 @@ require_once 'controller.team.php';
             <tr>
                 <td><?php echo $teams["id"] ?></td>
                 <td><?php echo $teams["team"]; ?></td>
+                <td>
+                    <form action="controller.team.php" method="post">
+                        <input type="hidden" name="id" value="<?php echo $teams["id"] ?>">
+                        <button type="submit" name="delete">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="controller.team.php" method="post">
+                        <input type="hidden" name="join" value="<?php echo $teams["id"] ?>">
+                        <button type="submit" name="join">Join</button>
+                    </form>
+                </td>
             </tr>
             <?php endforeach;?>
         </tbody>
     </table>
+
+    <a href="../index.php">Anasayfa</a>
 </body>
 
 </html>
