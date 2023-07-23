@@ -55,7 +55,8 @@ $newTeamClass = new Team();
 
         </tbody>
     </table>
-
+    <a href="view.team.php">Team Page</a>
+    <br>
     <a href="../index.php">Anasayfa</a>
 </body>
 
