@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -11,10 +16,17 @@
 </head>
 
 <body>
+    <div style="display: flex; justify-content: center">
+        <?php if (isset($_SESSION["user_id"])): ?>
 
-    <p> <?php echo "Hello World"; ?> </p>
+        <h1>Welcome <?php echo $_SESSION["user_name"]; ?> </h1>
+        <?php else: ?>
+        <p> <?php echo "USER BİLGİSİNDE HATA VAR!"; ?> </p>
+        <?php endif;?>
+    </div>
 
-    <script src="" async defer></script>
+
+
 </body>
 
 </html>

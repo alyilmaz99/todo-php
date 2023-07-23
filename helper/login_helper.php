@@ -1,7 +1,7 @@
 <?php
 
 require_once '../helper/database.php';
-
+require_once '../helper/session_helper.php';
 class LoginHelper
 {
 
@@ -32,10 +32,12 @@ class LoginHelper
                     session_start();
                     session_regenerate_id();
                     $_SESSION["user_id"] = $user["id"];
+
                 }
             }
             $this->is_valid = true;
-
+            $session_helper = new SessionHelper($user);
+            $session_helper->sessionStart();
             header("Location: ../index.php");
             exit;
         }
