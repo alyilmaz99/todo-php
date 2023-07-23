@@ -3,6 +3,7 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 session_start();
 require_once 'controller.team.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +49,12 @@ require_once 'controller.team.php';
                     <form action="controller.team.php" method="post">
                         <input type="hidden" name="join" value="<?php echo $teams["id"] ?>">
                         <button type="submit" name="joinName">Join</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="controller.team.php" method="post">
+                        <input type="hidden" name="show" value="<?php echo $teams["id"] ?>">
+                        <button type="submit" name="showMember">Show Members</button>
                     </form>
                 </td>
             </tr>
