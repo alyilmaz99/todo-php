@@ -15,7 +15,7 @@
     <div style="display: flex; justify-content: center">
         <div>
             <h1>SignUp</h1>
-            <form action="auth/process-signup.php" method="post" id="signup" novalidate>
+            <form action="process-signup.php" method="post" id="signup" novalidate>
                 <div>
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" />

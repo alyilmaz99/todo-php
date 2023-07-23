@@ -21,15 +21,16 @@ class SignUp
     {
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
         DB::Init();
-        $sql = "INSERT INTO user (name,email,verification_code,password_hash)
+        $sql = "INSERT INTO user(name,email,verification_code,password_hash)
         VALUES (?,?,?,?)";
+        $verification_code = "00";
         $stmt = DB::get()->stmt_init();
 
         if (!$stmt->prepare($sql)) {
             die("SQL error: " . DB::get()->error);
         }
 
-        $stmt->bind_param("ssss", $name, $email, $verification_code, $password_hash, );
+        $stmt->bind_param("ssss", $this->name, $this->email, $verification_code, $password_hash);
 
         if (!$stmt->execute()) {
             if (DB::get()->errno === 1062) {
@@ -39,7 +40,7 @@ class SignUp
             }
         } else {
 
-            header("Location: /auth/login.php
+            header("Location: login.php
             ");
             exit;
         }
