@@ -62,23 +62,67 @@ $members = $todoController->getMembers();
 
 <body>
     <h1>Todo</h1>
-    <form action="todo.php" method="post">
+    <form method="post" id='addNewTodoForm'>
         <input type="text" name="todo" id="todo" placeholder="todo" />
+        <input type="hidden" name='team_id' id='team_id'>
         <div class="dropdown">
             <button type="submit" class="dropbtn">TEAM EKLE</button>
             <div class="dropdown-content">
                 <?php
 foreach ($members as $members) {
-    echo "<a href='todo.controller.php'>" . $members["team"] . "</a>";}
+    echo "<a href='todo.controller.php' class='update-todo-team' data-id='" . $members['team_id'] . "'>" . $members["team"] . "</a>";}
 ?>
             </div>
         </div>
         <button type="submit">EKLE</button>
         </div>
     </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Team id</th>
+                <th>User id</th>
+                <th>Todo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if ($todos != null) {
+    ;
+}
+?>
+            <?php foreach ($todos as $todos): ?>
+            <tr>
+                <td><?php echo $todos["id"] ?></td>
+                <td><?php if (!isset($todos["team_id"])) {
+    echo " Team atanmadi";
+} else {
+    echo $todos["team_id"];
+}?></td>
+                <td><?php echo $todos["user_id"] ?></td>
+                <td><?php echo $todos["task"] ?></td>
+            </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+
     <div>
         <a href=" ../index.php">Anasayfa</a>
     </div>
 </body>
+<script>
+var button = document.querySelectorAll('.update-todo-team')
+if (button) {
+    button.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault()
+            var team_id = button.getAttribute('data-id')
+            var teamIdInput = document.getElementById('team_id')
+            teamIdInput.value = team_id
+            document.getElementById('addNewTodoForm').submit()
+        })
+    })
+}
+</script>
 
 </html>

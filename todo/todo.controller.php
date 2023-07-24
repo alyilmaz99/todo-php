@@ -27,4 +27,50 @@ class TodoController
         }
     }
 
+    public function addTodos()
+    {
+        DB::Init();
+
+        $sql = "INSERT INTO todo (user_id, task, team_id) VALUES (?, ?, ?)";
+        $stmt = DB::get()->stmt_init();
+        if (!$stmt->prepare($sql)) {
+            die("SQL error: " . DB::get()->error);
+        }
+
+        if ($_POST["team_id"] == "0") {
+            $_POST["team_id"] = "Team Atanmadi";
+        }
+        $stmt->bind_param("sss", $_SESSION["user_id"], $_POST["todo"], $_POST["team_id"]);
+        if (!$stmt->execute()) {
+            die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
+        }
+    }
+    public function getTodos()
+    {
+        DB::Init();
+        $sql = "SELECT * FROM todo WHERE user_id = ?";
+        $stmt = DB::get()->stmt_init();
+        if (!$stmt->prepare($sql)) {
+            die("SQL error: " . DB::get()->error);
+        }
+        $stmt->bind_param("s", $_SESSION["user_id"]);
+        if (!$stmt->execute()) {
+            die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
+        } else {
+            $result = $stmt->get_result();
+            $todos = $result->fetch_all(MYSQLI_ASSOC);
+            return $todos;
+        }
+
+    }
+
 }
+
+$todoController = new TodoController();
+if (isset($_POST["todo"])) {
+
+    $todoController->addTodos();
+    header("Location: todo.view.php");
+    exit();
+}
+$todos = $todoController->getTodos();
