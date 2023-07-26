@@ -63,12 +63,12 @@ class TodoController
     public function getTodos()
     {
         DB::Init();
-        $sql = "SELECT t.*, u.name, te.team FROM todo as t LEFT JOIN user as u on u.id = t.user_id LEFT JOIN team as te on te.id = t.team_id WHERE t.user_id = ?";
+        $sql = "SELECT t.*, u.name, te.team FROM todo as t LEFT JOIN user as u on u.id = t.user_id LEFT JOIN team as te on te.id = t.team_id ";
         $stmt = DB::get()->stmt_init();
         if (!$stmt->prepare($sql)) {
             die("SQL error: " . DB::get()->error);
         }
-        $stmt->bind_param("s", $_SESSION["user_id"]);
+        //$stmt->bind_param("s", $_SESSION["user_id"]);
         if (!$stmt->execute()) {
             die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         } else {

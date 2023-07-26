@@ -3,8 +3,9 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 session_start();
 require_once "todo.controller.php";
+require_once "update.controller.php";
 $todoController = new TodoController();
-$members = $todoController->getMembers();
+
 ?>
 
 <!DOCTYPE html>
@@ -63,11 +64,12 @@ $members = $todoController->getMembers();
 <body>
     <?php if (isset($_SESSION['user_id'])): ?>
     <h1>Todo Update</h1>
-    <?php var_dump($update->catcher);?>
+    <?php var_dump($_GET['id']);?>
     <div>
         <form action="update.controller.php" method="post">
-            <input type="text" name="update_todo1" placeholder="update_todo" />
-            <button type="submit" name="update_todo2">Update</button>
+            <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
+            <input type="text" name="update_todo" placeholder="update_todo" />
+            <button type="submit">Update</button>
         </form>
     </div>
 

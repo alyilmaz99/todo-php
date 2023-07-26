@@ -106,9 +106,9 @@ foreach ($members as $members) {
                     </form>
                 </td>
                 <td>
-                    <form action="update.controller.php" method="post">
-                        <input type="hidden" name="update-page" value="<?php echo $todos["id"] ?>">
-                        <button type="submit" name="update-page">Update</button>
+                    <form action="update.view.php" method="get">
+                        <input type="hidden" name="id" value="<?php echo $todos["id"] ?>">
+                        <button type="submit">Update</button>
                     </form>
                 </td>
             </tr>
