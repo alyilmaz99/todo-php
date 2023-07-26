@@ -78,6 +78,20 @@ class TodoController
         }
 
     }
+    public function updateComplete()
+    {
+        DB::Init();
+        $sql = "UPDATE todo SET complete = 1 WHERE id = ?";
+        $stmt = DB::get()->stmt_init();
+        if (!$stmt->prepare($sql)) {
+            die("SQL error: " . DB::get()->error);
+        }
+        $stmt->bind_param("s", $_POST["complete"]);
+        if (!$stmt->execute()) {
+            die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
+        }
+
+    }
 
 }
 
@@ -90,6 +104,11 @@ if (isset($_POST["todo"])) {
 }
 if (isset($_POST["delete_todo1"])) {
     $todoController->deleteTodos();
+    header("Location: todo.view.php");
+    exit();
+}
+if (isset($_POST["complete"])) {
+    $todoController->updateComplete();
     header("Location: todo.view.php");
     exit();
 }

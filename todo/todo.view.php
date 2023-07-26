@@ -111,6 +111,12 @@ foreach ($members as $members) {
                         <button type="submit">Update</button>
                     </form>
                 </td>
+                <td>
+                    <form action="todo.controller.php" method="post">
+                        <input type="hidden" name="complete" value="<?php echo $todos["id"] ?>">
+                        <button type="submit">Complete</button>
+                    </form>
+                </td>
             </tr>
 
             <?php endforeach;?>
