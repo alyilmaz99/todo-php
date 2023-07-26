@@ -88,10 +88,7 @@ foreach ($members as $members) {
             </tr>
         </thead>
         <tbody>
-            <?php if ($todos != null) {
-    ;
-}
-?>
+
             <?php foreach ($todos as $todos): ?>
             <tr>
                 <td><?php echo $todos["id"] ?></td>
@@ -106,6 +103,12 @@ foreach ($members as $members) {
                     <form action="todo.controller.php" method="post">
                         <input type="hidden" name="delete_todo1" value="<?php echo $todos["id"] ?>">
                         <button type="submit" name="delete_todo2">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="update.controller.php" method="post">
+                        <input type="hidden" name="update-page" value="<?php echo $todos["id"] ?>">
+                        <button type="submit" name="update-page">Update</button>
                     </form>
                 </td>
             </tr>

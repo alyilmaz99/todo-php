@@ -53,7 +53,7 @@ class TodoController
         if (!$stmt->prepare($sql)) {
             die("SQL error: " . DB::get()->error);
         }
-        $stmt->bind_param("s", $_POST["delete_todo"]);
+        $stmt->bind_param("s", $_POST["delete_todo1"]);
         if (!$stmt->execute()) {
             die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         }
@@ -88,7 +88,7 @@ if (isset($_POST["todo"])) {
     header("Location: todo.view.php");
     exit();
 }
-if (isset($_POST["delete_todo2"])) {
+if (isset($_POST["delete_todo1"])) {
     $todoController->deleteTodos();
     header("Location: todo.view.php");
     exit();
