@@ -61,6 +61,7 @@ $members = $todoController->getMembers();
 </head>
 
 <body>
+    <?php if (isset($_SESSION['user_id'])): ?>
     <h1>Todo</h1>
     <form method="post" id='addNewTodoForm'>
         <input type="text" name="todo" id="todo" placeholder="todo" />
@@ -97,9 +98,9 @@ foreach ($members as $members) {
                 <td><?php if (!isset($todos["team_id"])) {
     echo " Team atanmadi";
 } else {
-    echo $todos["team_id"];
+    echo $todos["team"];
 }?></td>
-                <td><?php echo $todos["user_id"] ?></td>
+                <td><?php echo $todos["name"] ?></td>
                 <td><?php echo $todos["task"] ?></td>
             </tr>
             <?php endforeach;?>
@@ -109,6 +110,12 @@ foreach ($members as $members) {
     <div>
         <a href=" ../index.php">Anasayfa</a>
     </div>
+    <?php else: ?>
+    <div>
+        <?php header("Location: ../auth/login.php")?>
+
+    </div>
+    <?php endif;?>
 </body>
 <script>
 var button = document.querySelectorAll('.update-todo-team')
