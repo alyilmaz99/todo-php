@@ -102,7 +102,14 @@ foreach ($members as $members) {
 }?></td>
                 <td><?php echo $todos["name"] ?></td>
                 <td><?php echo $todos["task"] ?></td>
+                <td>
+                    <form action="todo.controller.php" method="post">
+                        <input type="hidden" name="delete_todo1" value="<?php echo $todos["id"] ?>">
+                        <button type="submit" name="delete_todo2">Delete</button>
+                    </form>
+                </td>
             </tr>
+
             <?php endforeach;?>
         </tbody>
     </table>

@@ -45,6 +45,20 @@ class TodoController
             die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         }
     }
+    public function deleteTodos()
+    {
+        DB::Init();
+        $sql = "DELETE FROM todo WHERE id = ?";
+        $stmt = DB::get()->stmt_init();
+        if (!$stmt->prepare($sql)) {
+            die("SQL error: " . DB::get()->error);
+        }
+        $stmt->bind_param("s", $_POST["delete_todo"]);
+        if (!$stmt->execute()) {
+            die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
+        }
+
+    }
 
     public function getTodos()
     {
@@ -71,6 +85,11 @@ $todoController = new TodoController();
 if (isset($_POST["todo"])) {
 
     $todoController->addTodos();
+    header("Location: todo.view.php");
+    exit();
+}
+if (isset($_POST["delete_todo2"])) {
+    $todoController->deleteTodos();
     header("Location: todo.view.php");
     exit();
 }
