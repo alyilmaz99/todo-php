@@ -85,6 +85,7 @@ foreach ($members as $members) {
                 <th>Team id</th>
                 <th>User id</th>
                 <th>Todo</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -99,6 +100,11 @@ foreach ($members as $members) {
 }?></td>
                 <td><?php echo $todos["name"] ?></td>
                 <td><?php echo $todos["task"] ?></td>
+                <td><?php if ($todos['is_complated']) {
+    echo "Completed";
+} else {
+    echo 'Not Completed';
+}?></td>
                 <td>
                     <form action="todo.controller.php" method="post">
                         <input type="hidden" name="delete_todo1" value="<?php echo $todos["id"] ?>">

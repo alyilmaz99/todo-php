@@ -63,7 +63,7 @@ class TodoController
     public function getTodos()
     {
         DB::Init();
-        $sql = "SELECT t.*, u.name, te.team FROM todo as t LEFT JOIN user as u on u.id = t.user_id LEFT JOIN team as te on te.id = t.team_id ";
+        $sql = "SELECT t.*, u.name, te.team FROM todo as t LEFT JOIN user as u on u.id = t.user_id LEFT JOIN team as te on te.id = t.team_id ORDER BY t.id DESC";
         $stmt = DB::get()->stmt_init();
         if (!$stmt->prepare($sql)) {
             die("SQL error: " . DB::get()->error);
@@ -78,19 +78,49 @@ class TodoController
         }
 
     }
+
+    public function getTodo($id)
+    {
+        DB::Init();
+        $sql = "SELECT  t.* FROM todo as t WHERE id= ? ";
+        $stmt = DB::get()->stmt_init();
+        if (!$stmt->prepare($sql)) {
+            die("Sql error: " . $stmt->error . "Error number" . DB::get()->errno);
+
+        }
+        $stmt->bind_param("s", $id);
+        if (!$stmt->execute()) {
+            die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
+        } else {
+            $result = $stmt->get_result();
+            $todo = $result->fetch_all(MYSQLI_ASSOC);
+            return $todo;
+        }
+
+    }
+
     public function updateComplete()
     {
         DB::Init();
-        $sql = "UPDATE todo SET complete = 1 WHERE id = ?";
+        $todoController = new TodoController();
+
+        $todos = $todoController->getTodo($_POST["complete"]);
+
+        $status = $todos[0]["is_complated"];
+        if ($status == 1) {
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+        $sql = "UPDATE todo SET is_complated = ? WHERE id = ?";
         $stmt = DB::get()->stmt_init();
         if (!$stmt->prepare($sql)) {
             die("SQL error: " . DB::get()->error);
         }
-        $stmt->bind_param("s", $_POST["complete"]);
+        $stmt->bind_param("sd", $status, $_POST["complete"]);
         if (!$stmt->execute()) {
             die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         }
-
     }
 
 }
