@@ -1,15 +1,18 @@
---login + 
---sign up +
+-- login + 
+-- sign up +
+-- profile update +
+-- logout +
 -- teams list +
 -- team members +
+-- join team +
+-- delete team +
+-- add team +
+-- delete team members
 -- routing +
--- todo -
--- todo list -
--- login validate -
--- signup validate - 
--- todo validate -
--- todo list validate -
--- team validate -
--- team list validate -
--- team members validate -
--- readme -
+-- todo list +
+-- add todo +
+-- add team todo
+-- update todo +
+-- delete todo +
+-- complete todo +
+
