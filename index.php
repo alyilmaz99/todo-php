@@ -32,8 +32,12 @@ require_once 'helper/session_helper.php';
         <button id="todo">Todo</button>
     </div>
     <div style="display: flex; justify-content: center">
+        <button id="profile">Profile</button>
+    </div>
+    <div style="display: flex; justify-content: center">
         <button id="logOut">Log Out</button>
     </div>
+
     <?php endif;?>
 </body>
 
@@ -49,6 +53,11 @@ button.addEventListener("click", function() {
 var button = document.getElementById("logOut");
 button.addEventListener("click", function() {
     window.location.href = "auth/logout.php";
+
+})
+var button = document.getElementById("profile");
+button.addEventListener("click", function() {
+    window.location.href = "profile/profile.view.php";
 
 })
 </script>
